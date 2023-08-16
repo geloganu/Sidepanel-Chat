@@ -1,7 +1,7 @@
 // Allows users to open the side panel by clicking on the action toolbar icon
 
 function sendDataToBackend(tabId, content) {
-  const url = 'https://chrome-panel-backend-ff37a3d3fc79.herokuapp.com/send/tab';
+  const url = 'http://127.0.0.1:8000/send/tab';
   tabId = String(tabId)
   fetch(url, {
       method: 'POST',
@@ -10,8 +10,10 @@ function sendDataToBackend(tabId, content) {
       },
       body: JSON.stringify({ "tab_id": tabId, "content": content })
   })
-  .then(response => {console.log('data response', response)})
- 
+  .then(response => response.text())
+  .then(data => {
+    console.log('Data response:', data);
+  })
   .catch(error => {
       console.error('Error sending data:', error);
   });
