@@ -2,13 +2,13 @@
 
 function sendDataToBackend(tabId, content) {
   const url = 'https://chrome-panel-backend-ff37a3d3fc79.herokuapp.com/send/tab';
-  content = JSON.stringify(content); 
+  // content = JSON.stringify(content);
   fetch(url, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
       },
-      body: { tableId: tabId, content: content }
+      body: JSON.stringify({ "tab_id": "tabId", "content": "content" })
   })
   .then(response => response)
   .then(responseData => {
