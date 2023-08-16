@@ -1,7 +1,7 @@
 // Allows users to open the side panel by clicking on the action toolbar icon
 
 function sendDataToBackend(tabId, content) {
-  const url = 'https://chrome-panel-backend-ff37a3d3fc79.herokuapp.com/send/text';
+  const url = 'https://chrome-panel-backend-ff37a3d3fc79.herokuapp.com/send/tab';
   content = JSON.stringify(content); 
   fetch(url, {
       method: 'POST',
@@ -10,7 +10,7 @@ function sendDataToBackend(tabId, content) {
       },
       body: { tableId: tabId, content: content }
   })
-  .then(response => response.json())
+  .then(response => response)
   .then(responseData => {
       console.log('Response from backend:', responseData);
   })
@@ -56,7 +56,6 @@ chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
 chrome.tabs.onActivated.addListener(function(activeInfo) {
   // Get the information about the newly activated tab
   const tabId = activeInfo.tabId;
-
   // Retrieve the tab using its ID
   chrome.tabs.get(tabId, function(tab) {
     // Check if the tab is accessible
