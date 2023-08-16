@@ -12,7 +12,10 @@
   "action": {
     "default_title": "Click to open panel"
   },
-  "permissions": ["sidePanel", "tabs"],
+  "permissions": [
+    "sidePanel",
+    "tabs",
+    "activeTabs"],
   "host_permissions": [
     "https://*/*", 
     "http://*/*",
