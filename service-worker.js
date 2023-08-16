@@ -5,6 +5,20 @@ chrome.sidePanel
 
 
 chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
-  const url = new URL(tab.url);
-  console.log(url)
+  if (info.status === 'complete') {
+    const url = new URL(tab.url);
+
+    // Fetch the HTML content of the webpage
+    fetch(url,{method: 'GET'})
+      .then(response => response.text())
+      .then(html => {
+        // Parse the HTML content using DOMParser
+        const doc = html;
+        console.log('acccessed')
+        console.log(doc);
+      })
+      .catch(error => {
+        console.error('Error fetching or parsing the HTML:', error);
+      });
+  }
 });

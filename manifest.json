@@ -13,6 +13,11 @@
     "default_title": "Click to open panel"
   },
   "permissions": ["sidePanel", "tabs"],
+  "host_permissions": [
+    "https://*/*", 
+    "http://*/*",
+    "chrome://*" 
+  ],
   "icons": {
     "16": "images/icon-16.png",
     "48": "images/icon-48.png",
