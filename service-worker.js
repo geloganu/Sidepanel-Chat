@@ -20,23 +20,23 @@ function sendDataToBackend(tabId, content) {
 }
 
 
-function fetchUrl(tabId,url) {
-  // Function logic goes here
-  fetch(url,{method: 'GET'})
-      .then(response => response.text())
-      .then(html => {
-        // Parse the HTML content using DOMParser
-        const doc = html;
-        console.log('acccessed on tab:', tabId)
-        console.log(doc);
-        console.log(typeof tabId)
-        console.log(typeof doc)
-        sendDataToBackend(tabId, doc)
-      })
-      .catch(error => {
-        console.error('Error fetching or parsing the HTML:', error);
-      });
-}
+// function fetchUrl(tabId,url) {
+//   // Function logic goes here
+//   fetch(url,{method: 'GET'})
+//       .then(response => response.text())
+//       .then(html => {
+//         // Parse the HTML content using DOMParser
+//         const doc = html;
+//         console.log('acccessed on tab:', tabId)
+//         console.log(doc);
+//         console.log(typeof tabId)
+//         console.log(typeof doc)
+//         sendDataToBackend(tabId, doc)
+//       })
+//       .catch(error => {
+//         console.error('Error fetching or parsing the HTML:', error);
+//       });
+// }
 
 chrome.sidePanel
   .setPanelBehavior({ openPanelOnActionClick: true })
@@ -48,7 +48,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
   if (info.status === 'complete') {
     const url = new URL(tab.url);
     // Fetch the HTML content of the webpage
-    fetchUrl(tabId,url)
+    sendDataToBackend(tabId,url)
   }
 });
 
@@ -62,7 +62,7 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
     if (!chrome.runtime.lastError && tab && tab.url.startsWith("http")) {
       const url = tab.url;
       // Fetch the HTML content of the webpage
-      fetchUrl(tabId,url)
+      sendDataToBackend(tabId,url)
     }
   });
 });
